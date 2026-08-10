@@ -1,3 +1,7 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
 const Leaf = ({ className = "" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 80 46" aria-hidden="true">
     <path d="M40 42C29 30 26 16 40 3c14 13 11 27 0 39Z" fill="none" stroke="currentColor" strokeWidth="1.5" />
@@ -9,6 +13,30 @@ const Tick = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7.8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
 );
 
+const appointmentTimes = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00"];
+
+function AppointmentBooking() {
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const earliestDate = useMemo(() => new Date(Date.now() + 86400000).toISOString().slice(0, 10), []);
+
+  return (
+    <section className="booking section-pad" id="appointment">
+      <div className="booking-intro">
+        <p className="eyebrow">Make an appointment</p>
+        <h2>Choose a moment<br />that feels <em>right.</em></h2>
+        <p>Select a date first, then choose from the one-hour appointments available that day. Your request will be reviewed before it is confirmed.</p>
+        <div className="booking-note"><Leaf /><span>Appointments are available from 10am to 4pm, with the final session beginning at 3pm.</span></div>
+      </div>
+      <div className="booking-card">
+        <div className="booking-step"><span>01</span><div><label htmlFor="appointment-date">Choose a date</label><input id="appointment-date" type="date" min={earliestDate} value={date} onChange={(event) => { setDate(event.target.value); setTime(""); }} /></div></div>
+        <div className={`booking-step ${date ? "" : "is-muted"}`}><span>02</span><div><p className="field-label">Choose a time</p><div className="time-grid" aria-label="Available appointment times">{appointmentTimes.map((slot) => <button type="button" key={slot} disabled={!date} className={time === slot ? "selected" : ""} onClick={() => setTime(slot)}>{slot}</button>)}</div></div></div>
+        <div className={`booking-step final-step ${date && time ? "" : "is-muted"}`}><span>03</span><div><p className="field-label">Request your appointment</p><p>{date && time ? `${new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" })} at ${time}` : "Your chosen appointment will appear here."}</p><button className="request-button" type="button" disabled>Calendar connection being prepared</button></div></div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <main>
@@ -18,10 +46,10 @@ export default function Home() {
         </a>
         <nav aria-label="Main navigation">
           <a href="#rooms">The space</a>
-          <a href="#pricing">Pricing</a>
+          <a href="#appointment">Appointments</a>
           <a href="#location">Location</a>
         </nav>
-        <a className="header-cta" href="tel:07508070295">Arrange a viewing</a>
+        <a className="header-cta" href="#appointment">Make an appointment</a>
       </header>
 
       <section className="hero" id="top">
@@ -30,13 +58,13 @@ export default function Home() {
           <h1>A calm space<br />for <em>your</em> practice.</h1>
           <p className="hero-intro">Beautiful, private therapy rooms for independent therapists, wellbeing practitioners and coaches — thoughtfully designed so you can focus on the people you support.</p>
           <div className="hero-actions">
-            <a className="button button-dark" href="tel:07508070295">Arrange a viewing <span>↗</span></a>
+            <a className="button button-light" href="#appointment">Make an appointment <span>↓</span></a>
             <a className="text-link" href="#rooms">Explore the space <span>↓</span></a>
           </div>
           <div className="hero-meta">
             <span><b>7 days</b> a week</span>
             <span><b>8am–9pm</b> availability</span>
-            <span><b>From £15</b> per hour</span>
+            <span><b>Private</b> &amp; peaceful</span>
           </div>
         </div>
         <div className="hero-image">
@@ -96,21 +124,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="pricing section-pad" id="pricing">
-        <div className="pricing-intro">
-          <p className="eyebrow light">Simple, flexible pricing</p>
-          <h2>Your practice.<br /><em>Your rhythm.</em></h2>
-          <p>Book around the way you work, whether that&apos;s the occasional session, the same weekly slot, or a room to call your own.</p>
-        </div>
-        <div className="price-card">
-          <div className="price-top"><p>Pay as you go</p><div><strong>£15</strong><span>/ hour</span></div><small>First come, first served</small></div>
-          <div className="price-options">
-            <div><h3>Regular weekly</h3><p>Reserve regular pre-booked times that work for your practice.</p></div>
-            <div><h3>Exclusive use</h3><p>Full-time exclusive use of your own room is also available.</p></div>
-          </div>
-          <div className="price-foot"><p><b>£25 one-off membership</b><br />Non-refundable · includes a set of keys</p><p>Discounted rates available for bookings over 3 hours.</p></div>
-        </div>
-      </section>
+      <AppointmentBooking />
 
       <section className="details section-pad">
         <div className="detail"><span>01</span><div><h3>Come and have a look</h3><p>Before joining, we&apos;ll show you around the centre and answer any questions so you can see if the space feels right for you.</p></div></div>
@@ -146,7 +160,7 @@ export default function Home() {
         <p className="eyebrow">Come and see for yourself</p>
         <h2>Could this be the<br />home for <em>your practice?</em></h2>
         <p>We&apos;d love to show you around Calm Collective and talk through what you need.</p>
-        <a className="button button-light" href="tel:07508070295">Call 07508 070295 <span>↗</span></a>
+        <a className="button button-light" href="#appointment">Make an appointment <span>↓</span></a>
       </section>
 
       <footer>

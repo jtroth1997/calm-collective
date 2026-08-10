@@ -40,6 +40,19 @@ function AppointmentBooking() {
 export default function Home() {
   return (
     <main>
+      <section className="premium-splash" id="top" aria-label="Calm Collective introduction">
+        <div className="ambient ambient-one" />
+        <div className="ambient ambient-two" />
+        <div className="wind-field wind-field-one" />
+        <div className="wind-field wind-field-two" />
+        <div className="splash-lockup">
+          <Leaf className="splash-mark" />
+          <div className="splash-wordmark"><span>calm</span><small>collective</small></div>
+          <p>Therapy rooms · Warwick</p>
+        </div>
+        <a className="scroll-cue" href="#welcome"><span>Discover</span><i /></a>
+      </section>
+
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="Calm Collective home">
           <span>calm</span><small>collective</small>
@@ -52,10 +65,10 @@ export default function Home() {
         <a className="header-cta" href="#appointment">Make an appointment</a>
       </header>
 
-      <section className="hero" id="top">
+      <section className="hero" id="welcome">
         <div className="hero-copy">
           <p className="eyebrow">Therapy rooms · Warwick</p>
-          <h1>A calm space<br />for <em>your</em> practice.</h1>
+          <h1>Space for the work<br />that <em>matters.</em></h1>
           <p className="hero-intro">Beautiful, private therapy rooms for independent therapists, wellbeing practitioners and coaches — thoughtfully designed so you can focus on the people you support.</p>
           <div className="hero-actions">
             <a className="button button-light" href="#appointment">Make an appointment <span>↓</span></a>

@@ -115,7 +115,7 @@ bookingForm.addEventListener('submit', async (event) => {
     }
     if (!result.ok || result.state !== 'confirmed') throw new Error(result.error || 'The request could not be confirmed. Please try again.');
 
-    setStatus('Your appointment request has been sent. Please check your email for the calendar invitation.', 'success');
+    setStatus('Your appointment request has been received. We’ll email your calendar invitation once the appointment is approved.', 'success');
     requestButton.textContent = 'Request sent';
     bookingForm.querySelectorAll('input, textarea, button').forEach((field) => { field.disabled = true; });
   } catch (error) {

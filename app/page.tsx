@@ -18,21 +18,23 @@ const appointmentTimes = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00"];
 function AppointmentBooking() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [detailsReady, setDetailsReady] = useState(false);
   const earliestDate = useMemo(() => new Date(Date.now() + 86400000).toISOString().slice(0, 10), []);
 
   return (
     <section className="booking section-pad" id="appointment">
       <div className="booking-intro">
         <p className="eyebrow">Make an appointment</p>
-        <h2>Choose a moment<br />that feels <em>right.</em></h2>
-        <p>Select a date first, then choose from the one-hour appointments available that day. Your request will be reviewed before it is confirmed.</p>
+        <h2>Let&apos;s talk about<br /><em>your practice.</em></h2>
+        <p>Book a relaxed, no-obligation visit to see the rooms, meet Angel and talk through exactly what you need from your working space.</p>
         <div className="booking-note"><Leaf /><span>Appointments are available from 10am to 4pm, with the final session beginning at 3pm.</span></div>
       </div>
-      <div className="booking-card">
+      <form className="booking-card" onSubmit={(event) => event.preventDefault()}>
         <div className="booking-step"><span>01</span><div><label htmlFor="appointment-date">Choose a date</label><input id="appointment-date" type="date" min={earliestDate} value={date} onChange={(event) => { setDate(event.target.value); setTime(""); }} /></div></div>
         <div className={`booking-step ${date ? "" : "is-muted"}`}><span>02</span><div><p className="field-label">Choose a time</p><div className="time-grid" aria-label="Available appointment times">{appointmentTimes.map((slot) => <button type="button" key={slot} disabled={!date} className={time === slot ? "selected" : ""} onClick={() => setTime(slot)}>{slot}</button>)}</div></div></div>
-        <div className={`booking-step final-step ${date && time ? "" : "is-muted"}`}><span>03</span><div><p className="field-label">Request your appointment</p><p>{date && time ? `${new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" })} at ${time}` : "Your chosen appointment will appear here."}</p><button className="request-button" type="button" disabled>Calendar connection being prepared</button></div></div>
-      </div>
+        <div className={`booking-step details-step ${date && time ? "" : "is-muted"}`}><span>03</span><div><p className="field-label">Tell us about you</p><div className="contact-grid"><label><span>Name</span><input type="text" name="name" autoComplete="name" required disabled={!date || !time} onChange={(event) => setDetailsReady(event.currentTarget.form?.checkValidity() ?? false)} /></label><label><span>Email</span><input type="email" name="email" autoComplete="email" required disabled={!date || !time} onChange={(event) => setDetailsReady(event.currentTarget.form?.checkValidity() ?? false)} /></label><label><span>Phone number</span><input type="tel" name="phone" autoComplete="tel" required disabled={!date || !time} onChange={(event) => setDetailsReady(event.currentTarget.form?.checkValidity() ?? false)} /></label><label className="requirements"><span>What would you like to discuss?</span><textarea name="requirements" rows={4} required disabled={!date || !time} placeholder="Tell us about your practice, the room you need and the days you are considering…" onChange={(event) => setDetailsReady(event.currentTarget.form?.checkValidity() ?? false)} /></label></div></div></div>
+        <div className={`booking-step final-step ${date && time && detailsReady ? "" : "is-muted"}`}><span>04</span><div><p className="field-label">Request your appointment</p><p>{date && time ? `${new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" })} at ${time}` : "Choose a date and time to continue."}</p><button className="request-button" type="submit" disabled>Online requests are being connected</button><small className="connection-note">Need to speak sooner? Call <a href="tel:07508070295">07508 070295</a>.</small></div></div>
+      </form>
     </section>
   );
 }
@@ -49,6 +51,8 @@ export default function Home() {
           <Leaf className="splash-mark" />
           <div className="splash-wordmark"><span>calm</span><small>collective</small></div>
           <p>Therapy rooms · Warwick</p>
+          <div className="splash-purpose">A calm, professional home for independent therapists.</div>
+          <a className="splash-cta" href="#appointment">Book a room viewing <span>↓</span></a>
         </div>
         <a className="scroll-cue" href="#welcome"><span>Discover</span><i /></a>
       </section>
@@ -69,9 +73,9 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow">Therapy rooms · Warwick</p>
           <h1>Space for the work<br />that <em>matters.</em></h1>
-          <p className="hero-intro">Beautiful, private therapy rooms for independent therapists, wellbeing practitioners and coaches — thoughtfully designed so you can focus on the people you support.</p>
+          <p className="hero-intro">Looking for a professional home for your practice? Discover beautiful, private therapy rooms designed for independent therapists, wellbeing practitioners and coaches.</p>
           <div className="hero-actions">
-            <a className="button button-light" href="#appointment">Make an appointment <span>↓</span></a>
+            <a className="button button-light" href="#appointment">Book a room viewing <span>↓</span></a>
             <a className="text-link" href="#rooms">Explore the space <span>↓</span></a>
           </div>
           <div className="hero-meta">

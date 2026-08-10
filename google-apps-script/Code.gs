@@ -86,21 +86,81 @@ function createBooking_(payload) {
     'Requirements:',
     requirements,
     '',
-    'Requested: ' + formatted
+    'Requested: ' + formatted,
+    '',
+    '[CALM_CUSTOMER_EMAIL:' + email + ']',
+    '[CALM_CUSTOMER_NAME:' + name + ']',
+    '[CALM_CUSTOMER_NOTIFIED:NO]',
+    '[CALM_DECLINE_NOTIFIED:NO]'
   ].join('\n');
 
   CalendarApp.getDefaultCalendar().createEvent(
-    'Calm Collective appointment — ' + name,
+    'APPROVAL REQUIRED — Calm Collective — ' + name,
     range.start,
     range.end,
     {
       description: description,
-      guests: JACK_CALENDAR_ID + ',' + email,
+      guests: JACK_CALENDAR_ID,
       sendInvites: true
     }
   );
 
   cache.put(rateKey, '1', 300);
+}
+
+
+function installApprovalTrigger() {
+  ScriptApp.getProjectTriggers().forEach(function(trigger) {
+    if (trigger.getHandlerFunction() === 'processPendingApprovals') ScriptApp.deleteTrigger(trigger);
+  });
+  ScriptApp.newTrigger('processPendingApprovals').timeBased().everyMinutes(1).create();
+}
+
+function processPendingApprovals() {
+  const calendar = CalendarApp.getDefaultCalendar();
+  const now = new Date();
+  const from = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+  const until = new Date(now.getTime() + 180 * 24 * 60 * 60 * 1000);
+
+  calendar.getEvents(from, until).forEach(function(event) {
+    if (event.getTitle().indexOf('APPROVAL REQUIRED — Calm Collective — ') !== 0) return;
+
+    let description = event.getDescription() || '';
+    const emailMatch = description.match(/\[CALM_CUSTOMER_EMAIL:([^\]]+)\]/);
+    const nameMatch = description.match(/\[CALM_CUSTOMER_NAME:([^\]]+)\]/);
+    if (!emailMatch) return;
+
+    const customerEmail = emailMatch[1];
+    const customerName = nameMatch ? nameMatch[1] : 'there';
+    const jackGuest = event.getGuestByEmail(JACK_CALENDAR_ID);
+    if (!jackGuest) return;
+
+    const response = jackGuest.getGuestStatus();
+    if (response === CalendarApp.GuestStatus.YES && description.indexOf('[CALM_CUSTOMER_NOTIFIED:NO]') !== -1) {
+      event.addGuest(customerEmail);
+      description = description.replace('[CALM_CUSTOMER_NOTIFIED:NO]', '[CALM_CUSTOMER_NOTIFIED:YES]');
+      event.setDescription(description);
+      event.setTitle(event.getTitle().replace('APPROVAL REQUIRED — ', 'CONFIRMED — '));
+    }
+
+    if (response === CalendarApp.GuestStatus.NO && description.indexOf('[CALM_DECLINE_NOTIFIED:NO]') !== -1) {
+      MailApp.sendEmail({
+        to: customerEmail,
+        subject: 'Your Calm Collective appointment request',
+        name: 'Calm Collective',
+        htmlBody: '<p>Hello ' + htmlEscape_(customerName) + ',</p><p>Thank you for requesting an appointment with Calm Collective. Unfortunately, we are unable to confirm that time.</p><p>Please return to the Calm Collective website to choose another suitable appointment, or call <a href="tel:07508070295">07508 070295</a>.</p><p>Warm regards,<br>Calm Collective</p>'
+      });
+      description = description.replace('[CALM_DECLINE_NOTIFIED:NO]', '[CALM_DECLINE_NOTIFIED:YES]');
+      event.setDescription(description);
+      event.setTitle(event.getTitle().replace('APPROVAL REQUIRED — ', 'DECLINED — '));
+    }
+  });
+}
+
+function htmlEscape_(value) {
+  return String(value).replace(/[&<>"']/g, function(character) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character];
+  });
 }
 
 function bookingStatus_(requestId) {

@@ -3,10 +3,21 @@
 import { useMemo, useState } from "react";
 
 const Leaf = ({ className = "" }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 80 46" aria-hidden="true">
-    <path d="M40 42C29 30 26 16 40 3c14 13 11 27 0 39Z" fill="none" stroke="currentColor" strokeWidth="1.5" />
-    <path d="M38 42C25 43 14 36 10 23c15-2 25 6 28 19ZM42 42c13 1 24-6 28-19-15-2-25 6-28 19Z" fill="none" stroke="currentColor" strokeWidth="1.5" />
+  <svg className={className} viewBox="0 0 120 74" aria-hidden="true">
+    <path className="logo-petal petal-centre" d="M60 48C45 34 44 17 60 3c16 14 15 31 0 45Z" fill="none" stroke="currentColor" strokeWidth="1.6" />
+    <path className="logo-petal petal-left-mid" d="M57 48C42 45 30 35 29 18c17 1 27 13 28 30Z" fill="none" stroke="currentColor" strokeWidth="1.6" />
+    <path className="logo-petal petal-right-mid" d="M63 48c15-3 27-13 28-30-17 1-27 13-28 30Z" fill="none" stroke="currentColor" strokeWidth="1.6" />
+    <path className="logo-petal petal-left-outer" d="M54 51C35 53 18 43 12 28c18-3 34 6 42 23Z" fill="none" stroke="currentColor" strokeWidth="1.6" />
+    <path className="logo-petal petal-right-outer" d="M66 51c19 2 36-8 42-23-18-3-34 6-42 23Z" fill="none" stroke="currentColor" strokeWidth="1.6" />
+    <path className="logo-base" d="M15 50c14 18 76 18 90 0" fill="none" stroke="currentColor" strokeWidth="1.6" />
   </svg>
+);
+
+const BrandLogo = ({ className = "" }: { className?: string }) => (
+  <div className={`brand-logo ${className}`} aria-label="Calm Collective">
+    <div className="brand-main"><span>calm</span><Leaf className="brand-lotus" /></div>
+    <small>collective</small>
+  </div>
 );
 
 const Tick = () => (
@@ -48,8 +59,7 @@ export default function Home() {
         <div className="wind-field wind-field-one" />
         <div className="wind-field wind-field-two" />
         <div className="splash-lockup">
-          <Leaf className="splash-mark" />
-          <div className="splash-wordmark"><span>calm</span><small>collective</small></div>
+          <BrandLogo className="splash-brand" />
           <p>Therapy rooms · Warwick</p>
           <div className="splash-purpose">A calm, professional home for independent therapists.</div>
           <a className="splash-cta" href="#appointment">Book a room viewing <span>↓</span></a>
@@ -58,9 +68,7 @@ export default function Home() {
       </section>
 
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Calm Collective home">
-          <span>calm</span><small>collective</small>
-        </a>
+        <a className="wordmark" href="#top" aria-label="Calm Collective home"><BrandLogo /></a>
         <nav aria-label="Main navigation">
           <a href="#rooms">The space</a>
           <a href="#appointment">Appointments</a>
@@ -181,7 +189,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <div className="footer-brand"><span>calm</span><small>collective</small></div>
+        <BrandLogo className="footer-brand" />
         <p>Therapy rooms to rent in Warwick, Warwickshire.</p>
         <a href="tel:07508070295">07508 070295</a>
         <p className="copyright">© 2026 Calm Collective</p>

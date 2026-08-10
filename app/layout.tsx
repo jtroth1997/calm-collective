@@ -7,7 +7,7 @@ const serif = Cormorant_Garamond({ variable: "--font-serif", subsets: ["latin"],
 
 export const metadata: Metadata = {
   title: "Calm Collective | Therapy Rooms to Rent in Warwick",
-  description: "Beautiful, flexible therapy rooms to rent in central Warwick for counsellors, therapists, coaches and wellbeing practitioners. From £15 per hour.",
+  description: "Beautiful, private therapy rooms in central Warwick for counsellors, therapists, coaches and wellbeing practitioners.",
   other: { "codex-preview": "development" },
 };
 

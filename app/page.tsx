@@ -58,6 +58,7 @@ export default function Home() {
         <div className="ambient ambient-two" />
         <div className="wind-field wind-field-one" />
         <div className="wind-field wind-field-two" />
+        <div className="wind-field wind-field-three" />
         <div className="splash-lockup">
           <BrandLogo className="splash-brand" />
           <p>Therapy rooms · Warwick</p>

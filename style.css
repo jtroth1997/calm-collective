@@ -876,3 +876,43 @@ footer{margin-top:22px}
   .faq-list details,.faq-list details[open]{border-radius:26px}
   .location,.final{border-radius:38px}
 }
+
+
+/* Stronger crystal-jade contrast against the mist background */
+.splash-brand .brand-main>span{
+  background-image:linear-gradient(112deg,
+    #14362c 0%,
+    #1d4638 25%,
+    #39715b 40%,
+    #9fcdb8 46%,
+    #f7fff9 49%,
+    #5b947a 53%,
+    #275844 62%,
+    #16392e 79%,
+    #234b3d 100%);
+  background-size:250% 100%;
+  -webkit-text-stroke:1.35px rgba(13,48,37,.82);
+  text-shadow:
+    0 1px 0 rgba(239,255,247,.62),
+    0 4px 8px rgba(23,59,47,.24),
+    0 17px 38px rgba(23,59,47,.3);
+  filter:drop-shadow(0 12px 22px rgba(20,54,44,.22));
+}
+.splash-brand>small{
+  color:#183e32;
+  text-shadow:0 1px 0 rgba(255,255,255,.75),0 5px 12px rgba(25,63,50,.2);
+}
+.splash-brand .brand-lotus path{
+  stroke:#194a39;
+  stroke-width:2.15;
+  filter:
+    drop-shadow(-1px -1px 0 rgba(247,255,250,.92))
+    drop-shadow(0 4px 6px rgba(21,62,48,.3));
+}
+@keyframes crystalJadeSheen{
+  0%{background-position:100% 50%}
+  100%{background-position:35% 50%}
+}
+@media(max-width:700px){
+  .splash-brand .brand-main>span{-webkit-text-stroke:.9px rgba(13,48,37,.78)}
+}

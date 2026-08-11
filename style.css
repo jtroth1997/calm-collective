@@ -1051,3 +1051,72 @@ footer{margin-top:22px}
 @media (prefers-reduced-motion:reduce){
   .splash-brand .brand-main>span{background-position:46% 50%}
 }
+
+
+/* True transparent glass — clear centres with polished crystal rims */
+.splash-brand .brand-main>span{
+  isolation:isolate;
+  background-image:linear-gradient(108deg,
+    rgba(238,255,247,.05) 0%,
+    rgba(238,255,247,.08) 17%,
+    rgba(255,255,255,.42) 20%,
+    rgba(255,255,255,.08) 23%,
+    rgba(135,193,164,.035) 39%,
+    rgba(255,255,255,.52) 47%,
+    rgba(255,255,255,.09) 51%,
+    rgba(113,178,145,.035) 70%,
+    rgba(247,255,251,.28) 82%,
+    rgba(238,255,247,.045) 87%,
+    rgba(238,255,247,.07) 100%);
+  background-size:265% 100%;
+  -webkit-text-stroke:1.35px rgba(246,255,251,.88);
+  text-shadow:
+    -1px -1px 0 rgba(255,255,255,.9),
+    1px 1px 0 rgba(4,47,31,.92),
+    2px 3px 1px rgba(2,32,21,.58),
+    0 12px 25px rgba(1,25,16,.38);
+  filter:
+    drop-shadow(0 1px 0 rgba(255,255,255,.82))
+    drop-shadow(0 10px 19px rgba(1,26,17,.32));
+}
+.splash-brand .brand-main>span::before{
+  content:"calm";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  -webkit-text-stroke:.65px rgba(255,255,255,.68);
+  transform:translate(-1px,-1px);
+  filter:drop-shadow(1px 2px 0 rgba(22,86,61,.48));
+  opacity:.9;
+}
+.splash-brand .brand-main>span::after{
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  -webkit-text-stroke:1.55px rgba(8,67,44,.58);
+  transform:translate(2px,3px);
+  filter:blur(.15px);
+  opacity:.85;
+}
+.splash-brand .brand-lotus path,
+.splash-brand .logo-base{
+  stroke:rgba(247,255,251,.9);
+  filter:
+    drop-shadow(-1px -1px 0 rgba(255,255,255,.95))
+    drop-shadow(2px 2px 0 rgba(6,62,41,.8))
+    drop-shadow(0 7px 8px rgba(1,27,17,.38));
+}
+.splash-brand>small{
+  color:rgba(229,248,238,.28);
+  -webkit-text-stroke:.8px rgba(247,255,251,.78);
+  text-shadow:
+    -1px -1px 0 rgba(255,255,255,.72),
+    1px 2px 0 rgba(4,54,35,.85),
+    0 7px 14px rgba(1,27,17,.35);
+}
+.splash-brand::after{
+  opacity:.5;
+  background:radial-gradient(ellipse at center,rgba(224,255,239,.25) 0%,rgba(113,183,148,.09) 43%,transparent 74%);
+}

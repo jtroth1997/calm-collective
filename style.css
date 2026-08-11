@@ -31,3 +31,63 @@
 /* Calm Collective sage-led palette and concise introductory motion */
 body,.space,.hero{background:var(--sage)}.qualities,.founder{background:var(--mid)}.appointment{background:var(--sage)}.site-header,.included,.final{background:var(--deep)}.booking-card{background:var(--pale)}
 .splash-brand .logo-petal,.splash-brand .logo-base{animation-duration:3.4s;animation-delay:.35s;animation-timing-function:linear;animation-iteration-count:1;animation-fill-mode:forwards}.wind-field{animation-duration:3.5s;animation-timing-function:cubic-bezier(.22,.65,.3,1);animation-iteration-count:1}.wind-field-one{animation-delay:.15s}.wind-field-two{animation-delay:.38s}.wind-field-three{animation-delay:.6s}
+
+
+/* Smooth, single-pass leaf breeze inspired by natural wind */
+.splash-brand .logo-petal{
+  animation-name:calmPetalDrift;
+  animation-duration:5s;
+  animation-timing-function:cubic-bezier(.45,0,.28,1);
+  animation-iteration-count:1;
+  animation-fill-mode:both;
+  opacity:1;
+  will-change:transform;
+}
+.splash-brand .petal-centre{animation-delay:.22s}
+.splash-brand .petal-left-mid{animation-delay:.3s}
+.splash-brand .petal-right-mid{animation-delay:.38s}
+.splash-brand .petal-left-outer{animation-delay:.46s}
+.splash-brand .petal-right-outer{animation-delay:.54s}
+.splash-brand .logo-base{
+  animation:calmBaseSettle 5s ease-in-out .22s 1 both;
+}
+.wind-field{
+  animation-name:calmWindTrace;
+  animation-duration:5.2s;
+  animation-timing-function:cubic-bezier(.3,0,.25,1);
+  animation-iteration-count:1;
+  animation-fill-mode:both;
+}
+.wind-field-one{animation-delay:.08s}
+.wind-field-two{animation-delay:.32s}
+.wind-field-three{animation-delay:.58s}
+
+@keyframes calmPetalDrift{
+  0%{transform:translate3d(0,0,0) rotate(0deg)}
+  9%{transform:translate3d(-18px,-9px,0) rotate(24deg)}
+  18%{transform:translate3d(-45px,-21px,0) rotate(52deg)}
+  27%{transform:translate3d(-77px,-24px,0) rotate(82deg)}
+  36%{transform:translate3d(-105px,-10px,0) rotate(116deg)}
+  45%{transform:translate3d(-121px,18px,0) rotate(151deg)}
+  54%{transform:translate3d(-106px,49px,0) rotate(188deg)}
+  63%{transform:translate3d(-61px,72px,0) rotate(226deg)}
+  72%{transform:translate3d(2px,76px,0) rotate(263deg)}
+  81%{transform:translate3d(61px,55px,0) rotate(299deg)}
+  89%{transform:translate3d(91px,20px,0) rotate(329deg)}
+  95%{transform:translate3d(53px,-7px,0) rotate(350deg)}
+  100%{transform:translate3d(0,0,0) rotate(360deg)}
+}
+@keyframes calmBaseSettle{
+  0%,100%{transform:scaleX(1)}
+  50%{transform:scaleX(.985)}
+}
+@keyframes calmWindTrace{
+  0%{transform:translate3d(-14vw,0,0) rotate(var(--wind-r)) scaleX(.62);opacity:0}
+  18%{opacity:.1}
+  48%{opacity:.25}
+  78%{opacity:.08}
+  100%{transform:translate3d(43vw,-1vh,0) rotate(var(--wind-r)) scaleX(1.06);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .splash-brand .logo-petal,.splash-brand .logo-base,.wind-field{animation:none!important}
+}

@@ -1,7 +1,7 @@
 const JACK_CALENDAR_ID = 'jackstuarttroth@gmail.com';
 const TIME_ZONE = 'Europe/London';
 const VALID_TIMES = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00'];
-const ENQUIRY_EMAIL = 'calmcollectivebooking@gmail.com';
+const ENQUIRY_EMAIL = 'jackstuarttroth@gmail.com';
 
 function doGet(event) {
   const params = event && event.parameter ? event.parameter : {};

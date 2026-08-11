@@ -37,7 +37,7 @@ body,.space,.hero{background:var(--sage)}.qualities,.founder{background:var(--mi
 .splash-brand .logo-petal{
   animation-name:calmPetalDrift;
   animation-duration:5s;
-  animation-timing-function:cubic-bezier(.45,0,.28,1);
+  animation-timing-function:linear;
   animation-iteration-count:1;
   animation-fill-mode:both;
   opacity:1;

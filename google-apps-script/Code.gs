@@ -105,6 +105,13 @@ function createBooking_(payload) {
     }
   );
 
+  MailApp.sendEmail({
+    to: JACK_CALENDAR_ID,
+    subject: 'New Calm Collective appointment request — ' + formatted,
+    name: 'Calm Collective Bookings',
+    htmlBody: '<p>A new appointment request has arrived for <strong>' + htmlEscape_(formatted) + '</strong>.</p><p>Open Google Calendar on your phone to accept, decline or propose another time.</p>'
+  });
+
   cache.put(rateKey, '1', 300);
 }
 

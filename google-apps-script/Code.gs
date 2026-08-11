@@ -47,6 +47,16 @@ function doPost(event) {
   return ContentService.createTextOutput('ok');
 }
 
+
+function authoriseEmailSending() {
+  MailApp.sendEmail({
+    to: ENQUIRY_EMAIL,
+    subject: 'Calm Collective email connection test',
+    name: 'Calm Collective Website',
+    body: 'Success — Google Apps Script is now authorised to send Calm Collective room enquiries.'
+  });
+}
+
 function createEnquiry_(payload) {
   const requestId = clean_(payload.requestId, 80);
   const name = clean_(payload.name, 100);

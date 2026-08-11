@@ -1641,3 +1641,24 @@ footer{margin-top:22px}
   .button,.header-cta,.splash-cta,.mobile-enquire,.request,
   .faq-list summary,.footer-links a{touch-action:manipulation}
 }
+
+
+/* Confirmed premises: three rooms and Market Place address */
+@media(min-width:1001px){
+  .room-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+.location-address{
+  margin:1.5rem 0 1.25rem;
+  font:500 clamp(1.45rem,2.2vw,2rem)/1.25 "Cormorant Garamond",serif;
+  font-style:normal;
+  letter-spacing:-.015em;
+}
+.location-address a{
+  display:inline-block;
+  border-bottom:1px solid currentColor;
+  padding-bottom:.35rem;
+}
+@media(max-width:760px){
+  .location-address{font-size:1.55rem;margin:1.25rem 0}
+  .location-address a{min-height:54px}
+}

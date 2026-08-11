@@ -285,3 +285,75 @@ body,.space,.hero{background:var(--sage)}.qualities,.founder{background:var(--mi
 .enquiry-card #request-step p:not(.label):not(.booking-status){color:#657068;line-height:1.6;font-size:.78rem}
 .enquiry-card .request{font-weight:600;cursor:pointer}
 .enquiry-card .request:disabled{cursor:not-allowed}
+
+
+/* Practitioner-focused conversion sections */
+.practitioner-fit{background:var(--deep)}
+.practice-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#ffffff2b;border:1px solid #ffffff2b}
+.practice-grid div{background:var(--deep);min-height:105px;padding:1.35rem;display:flex;align-items:flex-end;font:500 1.13rem/1.2 "Cormorant Garamond",serif}
+.fit-note{display:grid;grid-template-columns:.45fr 1fr;gap:4rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid #ffffff32}
+.fit-note strong{font:500 1.55rem "Cormorant Garamond",serif}.fit-note p{margin:0;color:#ffffffcf;line-height:1.75}
+
+.benefits-section{display:grid;grid-template-columns:repeat(3,1fr);background:var(--pale);color:var(--ink);padding:1px;gap:1px}
+.benefits-section article{background:var(--pale);min-height:255px;padding:3rem;border:1px solid #d7d4cb}
+.benefits-section span,.room-card-copy>span,.process-grid article>span{font-size:.62rem;letter-spacing:.14em;color:var(--sage)}
+.benefits-section h3,.room-card h3,.process-grid h3{font:500 1.7rem/1.1 "Cormorant Garamond",serif;margin:2.6rem 0 1rem}
+.benefits-section p,.room-card p,.process-grid p{line-height:1.7;color:#667069;margin:0}
+
+.rooms-section{background:var(--sage)}
+.room-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+.room-card{background:var(--pale);color:var(--ink);border-radius:24px;overflow:hidden}
+.room-photo-placeholder{height:330px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#526f61,#95a698);position:relative;overflow:hidden}
+.room-photo-placeholder:before,.room-photo-placeholder:after{content:"";position:absolute;border:1px solid #ffffff35;border-radius:50%;width:60%;aspect-ratio:1}
+.room-photo-placeholder:before{left:-22%;top:-40%}.room-photo-placeholder:after{right:-25%;bottom:-55%}
+.room-photo-placeholder span{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#ffffffc9;position:relative;z-index:1}
+.room-card-copy{padding:2rem 2.2rem 2.4rem}.room-card h3{font-size:2rem;margin:1rem 0 .7rem}
+.room-disclaimer{font-size:.68rem;color:#ffffffb8;line-height:1.6;margin:1.4rem 0 0}
+
+.process-section{background:var(--mid)}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#ffffff28}
+.process-grid article{background:var(--mid);padding:3rem;min-height:270px}
+.process-grid article>span{color:#fff}.process-grid h3{color:#fff;margin-top:3.5rem}
+.process-grid p{color:#ffffffd3}
+
+.independent-section{background:var(--deep)}
+.faq-section{background:var(--pale);color:var(--ink)}
+.faq-section .section-heading>p{color:#626b65}
+.faq-list{border-top:1px solid #cbc9c1}
+.faq-list details{border-bottom:1px solid #cbc9c1;padding:0 0}
+.faq-list summary{list-style:none;cursor:pointer;padding:1.5rem 3rem 1.5rem 0;font:500 1.35rem/1.25 "Cormorant Garamond",serif;position:relative}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:after{content:"+";position:absolute;right:.2rem;top:1.35rem;color:var(--sage);font:400 1.5rem "DM Sans",sans-serif}
+.faq-list details[open] summary:after{content:"−"}
+.faq-list details p{max-width:800px;margin:0;padding:0 2rem 1.6rem 0;color:#626b65;line-height:1.75;font-size:.88rem}
+
+.contact-grid [hidden]{display:none!important}
+.contact-grid .other-therapy input{border-color:var(--sage)}
+.privacy-prompt{font-size:.68rem!important;color:#69736c!important;margin:1rem 0}
+.privacy-prompt a{text-decoration:underline}
+.location-note{font-size:.72rem}
+.mobile-enquire{display:none}
+.footer-links{display:flex;flex-wrap:wrap;gap:.8rem 1.3rem}
+footer{grid-template-columns:1.1fr 1fr 1.5fr auto}
+
+@media(max-width:1000px){
+  .practice-grid{grid-template-columns:repeat(2,1fr)}
+  .benefits-section{grid-template-columns:repeat(2,1fr)}
+  .room-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  body{padding-bottom:70px}
+  .practice-grid,.benefits-section,.process-grid,.room-grid{grid-template-columns:1fr}
+  .practice-grid div{min-height:74px}
+  .fit-note{grid-template-columns:1fr;gap:.8rem}
+  .benefits-section article{min-height:210px;padding:2.2rem 1.6rem}
+  .benefits-section h3{margin-top:2rem}
+  .room-photo-placeholder{height:245px}
+  .room-card{border-radius:18px}
+  .process-grid article{min-height:225px;padding:2.2rem 1.6rem}
+  .process-grid h3{margin-top:2.3rem}
+  .faq-list summary{font-size:1.2rem;padding-right:2rem}
+  .mobile-enquire{display:flex;position:fixed;z-index:20;left:12px;right:12px;bottom:10px;height:52px;border-radius:999px;background:#fff;color:var(--deep);align-items:center;justify-content:center;font-size:.78rem;font-weight:600;box-shadow:0 14px 40px #10271f55;border:1px solid #d8ddd8}
+  footer{grid-template-columns:1fr;padding-bottom:5rem}
+  .footer-links{flex-direction:column}
+}

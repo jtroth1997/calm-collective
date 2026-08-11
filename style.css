@@ -710,3 +710,74 @@ footer{margin-top:22px}
     100%{transform:translate3d(0,0,0) rotate(360deg)}
   }
 }
+
+
+/* Crystal Jade dimensional hero logo */
+.splash-brand{filter:none}
+.splash-brand .brand-main>span{
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  background-image:
+    linear-gradient(112deg,
+      #18372e 0%,
+      #274d40 22%,
+      #76a994 39%,
+      #e8f5ee 47%,
+      #4f8a73 53%,
+      #1f4437 69%,
+      #8db8a5 84%,
+      #24483b 100%);
+  background-size:220% 100%;
+  background-position:100% 50%;
+  -webkit-text-stroke:1px rgba(18,52,42,.34);
+  text-shadow:
+    1px 1px 0 #416b5b,
+    2px 2px 0 #365e50,
+    3px 3px 0 #2d5447,
+    4px 4px 0 #274b40,
+    5px 5px 0 #214239,
+    7px 9px 16px rgba(26,54,45,.22),
+    16px 22px 44px rgba(33,60,51,.18);
+  animation:crystalJadeSheen 1.8s cubic-bezier(.22,1,.36,1) 4.35s 1 both;
+  transform:translateZ(0);
+}
+.splash-brand>small{
+  color:#26483c;
+  text-shadow:
+    1px 1px 0 rgba(255,255,255,.7),
+    2px 3px 7px rgba(32,67,55,.18);
+}
+.splash-brand .brand-lotus path{
+  stroke:#285747;
+  stroke-width:1.75;
+  filter:
+    drop-shadow(-1px -1px 0 rgba(242,255,248,.75))
+    drop-shadow(2px 3px 0 rgba(35,79,63,.32))
+    drop-shadow(5px 7px 8px rgba(30,63,52,.18));
+}
+.splash-brand .logo-base{
+  stroke:#315e4e;
+  filter:
+    drop-shadow(-1px -1px 0 rgba(255,255,255,.7))
+    drop-shadow(2px 3px 2px rgba(30,63,52,.22));
+}
+@keyframes crystalJadeSheen{
+  0%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@media(max-width:700px){
+  .splash-brand .brand-main>span{
+    -webkit-text-stroke:.6px rgba(18,52,42,.3);
+    text-shadow:
+      1px 1px 0 #416b5b,
+      2px 2px 0 #365e50,
+      3px 3px 0 #2d5447,
+      4px 5px 11px rgba(26,54,45,.2),
+      10px 14px 28px rgba(33,60,51,.14);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .splash-brand .brand-main>span{animation:none;background-position:35% 50%}
+}

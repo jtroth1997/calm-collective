@@ -268,3 +268,20 @@ body,.space,.hero{background:var(--sage)}.qualities,.founder{background:var(--mi
   .wind-swirl{inset:12% -20% 14% -20%}
   .wind-swirl path{stroke-width:1.9}
 }
+
+
+/* Simple practitioner callback enquiry */
+.enquiry-card .step{padding:2.25rem 0}
+.contact-grid select{
+  width:100%;
+  padding:1rem;
+  border:1px solid #bdc5bd;
+  border-radius:14px;
+  background:#fff;
+  color:var(--ink);
+  font:inherit;
+}
+.contact-grid label>span em{font-size:.9em;color:#7b847d}
+.enquiry-card #request-step p:not(.label):not(.booking-status){color:#657068;line-height:1.6;font-size:.78rem}
+.enquiry-card .request{font-weight:600;cursor:pointer}
+.enquiry-card .request:disabled{cursor:not-allowed}

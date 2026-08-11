@@ -94,7 +94,8 @@ enquiryForm.addEventListener('submit', async (event) => {
     enquiryButton.textContent = 'Submitted';
     enquiryForm.querySelectorAll('input, select, textarea, button').forEach((field) => { field.disabled = true; });
   } catch (error) {
-    setStatus(error.message, 'error');
+    const technicalError = /permission|authori[sz]ation|MailApp|googleapis/i.test(error.message || '');
+    setStatus(technicalError ? 'We could not send your enquiry just now. Please call 07508 070295 or try again shortly.' : error.message, 'error');
     enquiryButton.disabled = false;
     enquiryButton.textContent = 'Submit';
   }

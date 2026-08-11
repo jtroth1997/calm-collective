@@ -76,13 +76,15 @@ enquiryForm.addEventListener('submit', async (event) => {
     ? crypto.randomUUID()
     : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
   const formData = new FormData(enquiryForm);
+  const selectedTherapy = formData.get('therapyType');
+  const otherTherapy = formData.get('otherTherapy') || '';
   const payload = {
     action: 'enquiry',
     requestId,
     name: formData.get('name'),
     phone: formData.get('phone'),
-    therapyType: formData.get('therapyType'),
-    otherTherapy: formData.get('otherTherapy') || '',
+    therapyType: selectedTherapy === 'Other' ? `Other — ${otherTherapy}` : selectedTherapy,
+    otherTherapy,
     callbackTime: formData.get('callbackTime') || 'Any time',
     notes: formData.get('notes') || '',
     website: formData.get('website') || ''

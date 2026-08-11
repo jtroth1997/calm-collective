@@ -569,3 +569,104 @@ footer,.legal-header,.legal-footer{background:#1f3931}
   .hero-copy{background:linear-gradient(160deg,#f7f2ea,#ebe4d8)}
   .room-card{box-shadow:0 18px 50px rgba(55,83,73,.1)}
 }
+
+
+/* Calm Atelier — consistent Apple-inspired luxury system */
+:root{
+  --forest:#213c33;
+  --forest-soft:#31584a;
+  --ink:#2b3732;
+  --ivory:#f5f1e9;
+  --porcelain:#fbfaf7;
+  --mist:#e4ece7;
+  --sage:#a9bcae;
+  --sage-deep:#748e7e;
+  --hairline:rgba(33,60,51,.13);
+  --shadow:0 28px 80px rgba(37,62,53,.1);
+}
+html{background:var(--ivory);scroll-padding-top:88px}
+body{background:var(--ivory);color:var(--ink)}
+.section{padding-top:10rem;padding-bottom:10rem}
+h1,h2{letter-spacing:-.052em}
+.eyebrow{letter-spacing:.27em}
+.premium-splash{background:linear-gradient(145deg,#e5ede8 0%,#c8d8cf 54%,#a9bfae 100%)}
+.premium-splash:after{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(33,60,51,.08))}
+.site-header{height:82px;background:rgba(251,250,247,.82);backdrop-filter:blur(28px) saturate(145%);-webkit-backdrop-filter:blur(28px) saturate(145%);border-color:var(--hairline)}
+.site-header nav{gap:2.1rem}
+.site-header nav a,.header-cta{font-size:.72rem}
+.header-cta{background:var(--forest);color:#fff;border:0;border-radius:999px;padding:.78rem 1.15rem}
+.hero{padding:22px;gap:22px;background:var(--ivory);grid-template-columns:1fr 1fr}
+.hero-copy,.hero-photo{border-radius:38px;overflow:hidden;min-height:740px}
+.hero-copy{padding:10rem 7vw 4rem;background:linear-gradient(150deg,#eef3ef,#e3ebe6)}
+.hero-copy:before{background:rgba(255,255,255,.32)}
+.hero h1{font-size:clamp(4.2rem,6.6vw,7.2rem)}
+.hero-photo{min-height:740px}
+.actions .button{min-width:230px}
+.button,.splash-cta,.request{min-height:52px;align-items:center;border-radius:999px}
+.intro-section{background:var(--ivory);color:var(--ink)}
+.intro-section .two-col{padding-bottom:1rem}
+.practitioner-fit{background:var(--mist);color:var(--ink)}
+.practice-grid{gap:.75rem;background:transparent;border:0}
+.practice-grid div{background:rgba(251,250,247,.8);border:1px solid var(--hairline);border-radius:18px;min-height:112px;padding:1.5rem;box-shadow:0 12px 36px rgba(44,70,60,.045)}
+.fit-note{border-color:var(--hairline)}
+.benefits-section{padding:6rem 5vw;gap:1rem;background:var(--ivory)}
+.benefits-section article,.benefits-section article:nth-child(n){background:var(--porcelain);border:1px solid var(--hairline);border-radius:28px;box-shadow:0 18px 55px rgba(44,70,60,.055)}
+.benefits-section article:nth-child(2),.benefits-section article:nth-child(5){background:var(--mist)}
+.rooms-section{background:var(--porcelain);color:var(--ink)}
+.room-grid{gap:1.5rem}
+.room-card{border:1px solid var(--hairline);border-radius:32px;box-shadow:var(--shadow);transition:transform .6s cubic-bezier(.22,1,.36,1),box-shadow .6s ease}
+.room-card:hover{transform:translateY(-7px);box-shadow:0 38px 95px rgba(37,62,53,.15)}
+.room-photo-placeholder,.room-card:nth-child(n) .room-photo-placeholder{background:linear-gradient(145deg,#91aa9b,#d4e0d8)}
+.room-card:nth-child(even) .room-photo-placeholder{background:linear-gradient(145deg,#7f9989,#c7d6cd)}
+.process-section{background:var(--forest);color:#fff}
+.process-section .section-heading>p{color:rgba(255,255,255,.72)}
+.process-grid{gap:1rem;background:transparent}
+.process-grid article{background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.14);border-radius:28px;backdrop-filter:blur(8px)}
+.process-grid article>span,.process-grid h3{color:#fff}
+.process-grid p{color:rgba(255,255,255,.7)}
+.appointment{background:var(--mist);color:var(--ink);align-items:start}
+.booking-card{border:1px solid var(--hairline);border-radius:34px;box-shadow:var(--shadow)}
+.contact-grid input,.contact-grid textarea,.contact-grid select{border:1px solid rgba(33,60,51,.16);transition:border-color .3s ease,box-shadow .3s ease}
+.contact-grid input:focus,.contact-grid textarea:focus,.contact-grid select:focus{outline:0;border-color:var(--sage-deep);box-shadow:0 0 0 4px rgba(116,142,126,.14)}
+.independent-section{background:var(--ivory);color:var(--ink)}
+.independent-section .two-col>div p{color:#58675f}
+.independent-section .two-col .lead{color:var(--forest)}
+.faq-section{background:var(--porcelain)}
+.faq-list details{transition:background .35s ease}
+.faq-list details[open]{background:var(--mist);padding-left:1.2rem;padding-right:1.2rem;border-radius:16px}
+.location{margin:22px;background:var(--mist);border-radius:38px;overflow:hidden;min-height:680px}
+.location>div{background:linear-gradient(145deg,#dbe6df,#c7d7cd)}
+.final{margin:22px;border-radius:38px;background:linear-gradient(145deg,#203b32,#31594b);overflow:hidden}
+footer{margin-top:22px}
+.mobile-enquire{box-shadow:0 18px 55px rgba(33,60,51,.25)}
+
+/* restrained scroll reveals */
+.premium-reveal{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.premium-reveal.is-visible{opacity:1;transform:none}
+.premium-reveal:nth-child(2){transition-delay:.06s}
+.premium-reveal:nth-child(3){transition-delay:.12s}
+
+@media(max-width:900px){
+  .section{padding-top:7rem;padding-bottom:7rem}
+  .hero{padding:12px;gap:12px}
+  .hero-copy,.hero-photo{border-radius:28px}
+  .site-header{height:76px}
+  .header-cta{padding:.72rem 1rem}
+}
+@media(max-width:700px){
+  .section{padding:6rem 6vw}
+  .hero{padding:8px;display:grid}
+  .hero-copy{min-height:590px;padding:7rem 7vw 4rem}
+  .hero-photo{min-height:500px}
+  .benefits-section{padding:4.5rem 12px}
+  .benefits-section article{border-radius:22px}
+  .practice-grid div{border-radius:16px;min-height:82px}
+  .room-card,.booking-card{border-radius:24px}
+  .process-grid article{border-radius:22px}
+  .location,.final{margin:10px;border-radius:26px}
+  .location{min-height:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .premium-reveal{opacity:1;transform:none;transition:none}
+  .room-card{transition:none}
+}

@@ -971,3 +971,83 @@ footer{margin-top:22px}
 @media(max-width:700px){
   .splash-brand .brand-main>span{-webkit-text-stroke:.7px rgba(221,239,230,.72)}
 }
+
+
+/* Clear crystal wordmark — transparent glass over the original green */
+.splash-brand{
+  position:relative;
+  isolation:isolate;
+}
+.splash-brand::after{
+  content:"";
+  position:absolute;
+  left:12%;
+  right:12%;
+  bottom:-1.25rem;
+  height:2.35rem;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(231,255,243,.34) 0%,rgba(139,194,166,.14) 42%,transparent 74%);
+  filter:blur(12px);
+  opacity:.78;
+}
+.splash-brand .brand-main>span{
+  position:relative;
+  background-image:linear-gradient(112deg,
+    rgba(255,255,255,.14) 0%,
+    rgba(247,255,251,.62) 14%,
+    rgba(135,190,163,.10) 29%,
+    rgba(255,255,255,.78) 45%,
+    rgba(92,156,126,.15) 54%,
+    rgba(239,255,247,.52) 72%,
+    rgba(126,184,155,.09) 100%);
+  background-size:250% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+  -webkit-text-stroke:1.25px rgba(239,255,247,.76);
+  text-shadow:
+    -1px -1px 0 rgba(255,255,255,.8),
+    1px 1px 0 rgba(5,52,34,.78),
+    2px 3px 2px rgba(3,37,24,.35),
+    0 14px 30px rgba(2,30,19,.35);
+  filter:
+    drop-shadow(0 1px 0 rgba(255,255,255,.82))
+    drop-shadow(0 12px 23px rgba(2,30,19,.3));
+}
+.splash-brand .brand-main>span::after{
+  content:"calm";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  color:rgba(203,238,221,.06);
+  -webkit-text-fill-color:rgba(203,238,221,.06);
+  -webkit-text-stroke:2.1px rgba(15,76,53,.34);
+  transform:translate(2px,3px);
+  filter:blur(.25px);
+}
+.splash-brand>small{
+  color:rgba(239,253,246,.9);
+  text-shadow:
+    -1px -1px 0 rgba(255,255,255,.68),
+    1px 1px 0 rgba(6,52,35,.78),
+    0 8px 16px rgba(2,31,20,.34);
+}
+.splash-brand .brand-lotus path,
+.splash-brand .logo-base{
+  stroke:rgba(239,255,247,.84);
+  stroke-width:2;
+  filter:
+    drop-shadow(-1px -1px 0 rgba(255,255,255,.9))
+    drop-shadow(1px 1px 0 rgba(5,55,36,.82))
+    drop-shadow(0 8px 9px rgba(2,29,19,.34));
+}
+@keyframes crystalJadeSheen{
+  0%{background-position:100% 50%}
+  100%{background-position:20% 50%}
+}
+@media (prefers-reduced-motion:reduce){
+  .splash-brand .brand-main>span{background-position:46% 50%}
+}

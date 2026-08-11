@@ -62,11 +62,14 @@ function createEnquiry_(payload) {
   const name = clean_(payload.name, 100);
   const phone = clean_(payload.phone, 40);
   const therapyType = clean_(payload.therapyType, 120);
+  const otherTherapy = clean_(payload.otherTherapy, 160);
+  const callbackTime = clean_(payload.callbackTime, 100) || 'Any time';
   const notes = clean_(payload.notes, 1800);
   const website = clean_(payload.website, 100);
 
   if (website) throw new Error('Unable to process this enquiry.');
   if (!requestId || !name || !phone || !therapyType) throw new Error('Please complete your name, phone number and therapy type.');
+  if (therapyType === 'Other' && !otherTherapy) throw new Error('Please tell us what therapy or service you provide.');
 
   const rateKey = 'enquiry:' + Utilities.base64EncodeWebSafe(phone).slice(0, 80);
   const cache = CacheService.getScriptCache();
@@ -77,7 +80,8 @@ function createEnquiry_(payload) {
     '',
     'Name: ' + name,
     'Phone: ' + phone,
-    'Therapy / service: ' + therapyType,
+    'Therapy / service: ' + (therapyType === 'Other' ? otherTherapy : therapyType),
+    'Best time to call: ' + callbackTime,
     '',
     'Additional notes:',
     notes || 'No additional notes provided.',
@@ -94,7 +98,8 @@ function createEnquiry_(payload) {
       '<h2>New room hire enquiry</h2>' +
       '<p><strong>Name:</strong> ' + htmlEscape_(name) + '<br>' +
       '<strong>Phone:</strong> <a href="tel:' + htmlEscape_(phone) + '">' + htmlEscape_(phone) + '</a><br>' +
-      '<strong>Therapy / service:</strong> ' + htmlEscape_(therapyType) + '</p>' +
+      '<strong>Therapy / service:</strong> ' + htmlEscape_(therapyType === 'Other' ? otherTherapy : therapyType) + '<br>' +
+      '<strong>Best time to call:</strong> ' + htmlEscape_(callbackTime) + '</p>' +
       '<p><strong>Additional notes</strong><br>' + htmlEscape_(notes || 'No additional notes provided.').replace(/\n/g, '<br>') + '</p>' +
       '<p>Please contact this practitioner by phone to discuss their room requirements.</p>'
   });

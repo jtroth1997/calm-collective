@@ -1,6 +1,7 @@
 const JACK_CALENDAR_ID = 'jackstuarttroth@gmail.com';
 const TIME_ZONE = 'Europe/London';
 const VALID_TIMES = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00'];
+const ENQUIRY_EMAIL = 'calmcollectivebooking@gmail.com';
 
 function doGet(event) {
   const params = event && event.parameter ? event.parameter : {};
@@ -8,7 +9,9 @@ function doGet(event) {
   let result;
 
   try {
-    if (params.action === 'availability') {
+    if (params.action === 'enquiry-health') {
+      result = { ok: true, mode: 'callback-enquiry' };
+    } else if (params.action === 'availability') {
       result = { ok: true, slots: availableSlots_(params.date) };
     } else if (params.action === 'status') {
       result = bookingStatus_(params.requestId);
@@ -30,12 +33,63 @@ function doPost(event) {
     const payload = JSON.parse((event && event.postData && event.postData.contents) || '{}');
     requestId = clean_(payload.requestId, 80);
     if (!requestId) throw new Error('Missing request reference.');
-    createBooking_(payload);
+
+    if (payload.action === 'enquiry') {
+      createEnquiry_(payload);
+    } else {
+      createBooking_(payload);
+    }
+
     cacheStatus_(requestId, { ok: true, state: 'confirmed' });
   } catch (error) {
-    if (requestId) cacheStatus_(requestId, { ok: false, state: 'failed', error: error.message || 'The appointment could not be requested.' });
+    if (requestId) cacheStatus_(requestId, { ok: false, state: 'failed', error: error.message || 'Your enquiry could not be sent.' });
   }
   return ContentService.createTextOutput('ok');
+}
+
+function createEnquiry_(payload) {
+  const requestId = clean_(payload.requestId, 80);
+  const name = clean_(payload.name, 100);
+  const phone = clean_(payload.phone, 40);
+  const therapyType = clean_(payload.therapyType, 120);
+  const notes = clean_(payload.notes, 1800);
+  const website = clean_(payload.website, 100);
+
+  if (website) throw new Error('Unable to process this enquiry.');
+  if (!requestId || !name || !phone || !therapyType) throw new Error('Please complete your name, phone number and therapy type.');
+
+  const rateKey = 'enquiry:' + Utilities.base64EncodeWebSafe(phone).slice(0, 80);
+  const cache = CacheService.getScriptCache();
+  if (cache.get(rateKey)) throw new Error('An enquiry was recently sent from this phone number. Please wait a few minutes.');
+
+  const plainBody = [
+    'New room hire enquiry from the Calm Collective website',
+    '',
+    'Name: ' + name,
+    'Phone: ' + phone,
+    'Therapy / service: ' + therapyType,
+    '',
+    'Additional notes:',
+    notes || 'No additional notes provided.',
+    '',
+    'Please contact this practitioner by phone to discuss their room requirements.'
+  ].join('\n');
+
+  MailApp.sendEmail({
+    to: ENQUIRY_EMAIL,
+    subject: 'New Calm Collective room enquiry — ' + name,
+    name: 'Calm Collective Website',
+    body: plainBody,
+    htmlBody:
+      '<h2>New room hire enquiry</h2>' +
+      '<p><strong>Name:</strong> ' + htmlEscape_(name) + '<br>' +
+      '<strong>Phone:</strong> <a href="tel:' + htmlEscape_(phone) + '">' + htmlEscape_(phone) + '</a><br>' +
+      '<strong>Therapy / service:</strong> ' + htmlEscape_(therapyType) + '</p>' +
+      '<p><strong>Additional notes</strong><br>' + htmlEscape_(notes || 'No additional notes provided.').replace(/\n/g, '<br>') + '</p>' +
+      '<p>Please contact this practitioner by phone to discuss their room requirements.</p>'
+  });
+
+  cache.put(rateKey, '1', 300);
 }
 
 function availableSlots_(dateText) {

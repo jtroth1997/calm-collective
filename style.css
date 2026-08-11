@@ -781,3 +781,98 @@ footer{margin-top:22px}
 @media(prefers-reduced-motion:reduce){
   .splash-brand .brand-main>span{animation:none;background-position:35% 50%}
 }
+
+
+/* Soft Form system — organic, rounded and flowing */
+.hero-copy,.hero-photo{border-radius:72px}
+.hero-copy{background:
+  radial-gradient(circle at 0% 100%,rgba(169,188,174,.32),transparent 34%),
+  linear-gradient(150deg,#f2f6f3,#e5ede8)}
+.badge{border-radius:52% 48% 55% 45%/44% 54% 46% 56%}
+.intro-section{position:relative;overflow:hidden}
+.intro-section:after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;right:-150px;bottom:-180px;background:rgba(169,188,174,.2);pointer-events:none}
+
+.practitioner-fit{margin:22px;border-radius:80px;overflow:hidden;background:
+  radial-gradient(circle at 8% 12%,rgba(255,255,255,.55),transparent 26%),
+  linear-gradient(145deg,#e7eee9,#d7e4dc)}
+.practice-grid{grid-template-columns:repeat(3,1fr);gap:1rem}
+.practice-grid div{min-height:72px;justify-content:center;align-items:center;text-align:center;border-radius:999px;padding:1rem 1.4rem;background:rgba(255,255,255,.72);box-shadow:0 14px 34px rgba(45,73,62,.06)}
+.practice-grid div:nth-child(even){transform:translateY(9px)}
+.fit-note{background:rgba(255,255,255,.5);border:0;border-radius:38px;padding:2rem 2.2rem;margin-top:3rem}
+
+.benefits-section{gap:1.4rem}
+.benefits-section article,.benefits-section article:nth-child(n){border:0;min-height:270px;box-shadow:0 24px 70px rgba(45,73,62,.08)}
+.benefits-section article:nth-child(1){border-radius:62px 32px 58px 36px}
+.benefits-section article:nth-child(2){border-radius:34px 68px 38px 62px}
+.benefits-section article:nth-child(3){border-radius:70px 35px 66px 42px}
+.benefits-section article:nth-child(4){border-radius:38px 62px 32px 68px}
+.benefits-section article:nth-child(5){border-radius:66px 40px 72px 34px}
+.benefits-section article:nth-child(6){border-radius:42px 72px 38px 64px}
+
+.rooms-section{position:relative;overflow:hidden}
+.rooms-section:before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;left:-300px;top:90px;background:rgba(169,188,174,.15);pointer-events:none}
+.room-grid{gap:2rem}
+.room-card{border:0;border-radius:64px 64px 46px 46px}
+.room-card:nth-child(even){border-radius:82px 46px 70px 42px}
+.room-photo-placeholder{border-radius:0 0 48% 48%/0 0 12% 12%}
+.room-card-copy{padding:2.4rem 2.7rem 3rem}
+
+.process-section{margin:22px;border-radius:84px;overflow:hidden;background:
+  radial-gradient(circle at 88% 10%,rgba(169,188,174,.22),transparent 28%),
+  linear-gradient(145deg,#203b32,#31594b)}
+.process-grid article{border:0;border-radius:58px;background:rgba(255,255,255,.085)}
+.process-grid article:nth-child(2){border-radius:80px 45px 75px 48px}
+.process-grid article:nth-child(3){border-radius:48px 78px 42px 72px}
+
+.appointment{margin:22px;border-radius:84px;overflow:hidden;background:
+  radial-gradient(circle at 5% 85%,rgba(255,255,255,.58),transparent 26%),
+  linear-gradient(145deg,#e4ece7,#cfddd5)}
+.booking-card{border:0;border-radius:58px}
+.contact-grid input,.contact-grid textarea,.contact-grid select{border-radius:22px}
+.request{border-radius:999px}
+
+.independent-section{margin:22px;border-radius:84px;background:
+  radial-gradient(circle at 90% 20%,rgba(169,188,174,.3),transparent 25%),
+  var(--ivory)}
+.faq-section{margin:22px;border-radius:84px;overflow:hidden}
+.faq-list details{border:0;background:#f3f6f4;border-radius:30px;margin:.75rem 0;padding:0 1.3rem}
+.faq-list details[open]{border-radius:38px;background:var(--mist)}
+
+.location,.final{border-radius:84px}
+.mobile-enquire{border-radius:999px}
+
+/* soften the dimensional logo into polished glass */
+.splash-brand .brand-main>span{
+  -webkit-text-stroke:.7px rgba(18,52,42,.24);
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.72),
+    0 5px 10px rgba(44,82,68,.16),
+    0 18px 38px rgba(33,60,51,.2);
+  filter:drop-shadow(0 12px 24px rgba(33,60,51,.12));
+}
+.splash-brand .brand-lotus path{
+  filter:
+    drop-shadow(-1px -1px 0 rgba(245,255,249,.8))
+    drop-shadow(0 5px 7px rgba(35,79,63,.22));
+}
+
+@media(max-width:900px){
+  .hero-copy,.hero-photo{border-radius:46px}
+  .practitioner-fit,.process-section,.appointment,.independent-section,.faq-section{margin:12px;border-radius:52px}
+  .practice-grid{grid-template-columns:repeat(2,1fr)}
+  .practice-grid div:nth-child(even){transform:none}
+  .location,.final{border-radius:52px}
+}
+@media(max-width:700px){
+  .hero-copy,.hero-photo{border-radius:34px}
+  .practitioner-fit,.process-section,.appointment,.independent-section,.faq-section{margin:8px;border-radius:38px}
+  .practice-grid{grid-template-columns:1fr}
+  .practice-grid div{min-height:62px}
+  .benefits-section article,.benefits-section article:nth-child(n){border-radius:38px}
+  .room-card,.room-card:nth-child(even){border-radius:42px}
+  .room-photo-placeholder{border-radius:0 0 42% 42%/0 0 9% 9%}
+  .process-grid article,.process-grid article:nth-child(n){border-radius:36px}
+  .booking-card{border-radius:38px}
+  .faq-list details,.faq-list details[open]{border-radius:26px}
+  .location,.final{border-radius:38px}
+}

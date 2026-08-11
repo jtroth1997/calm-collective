@@ -1159,3 +1159,56 @@ footer{margin-top:22px}
   color:rgba(231,250,240,.22);
   -webkit-text-stroke:.7px rgba(247,255,251,.76);
 }
+
+
+/* Premium convex bubble glass — dimensional without a background shadow */
+.splash-brand .brand-main>span{
+  background-image:
+    linear-gradient(180deg,
+      rgba(255,255,255,.52) 0%,
+      rgba(246,255,251,.22) 13%,
+      rgba(196,235,216,.07) 39%,
+      rgba(87,151,120,.07) 68%,
+      rgba(222,250,235,.24) 88%,
+      rgba(255,255,255,.42) 100%),
+    linear-gradient(108deg,
+      rgba(255,255,255,.06) 0%,
+      rgba(255,255,255,.34) 18%,
+      rgba(255,255,255,.06) 24%,
+      rgba(113,178,145,.025) 43%,
+      rgba(255,255,255,.42) 49%,
+      rgba(255,255,255,.05) 55%,
+      rgba(244,255,249,.19) 82%,
+      rgba(238,255,247,.05) 100%);
+  background-size:100% 100%,265% 100%;
+  background-blend-mode:screen;
+  -webkit-text-stroke:1.35px rgba(249,255,252,.93);
+  text-shadow:
+    -1px -1px 0 rgba(255,255,255,.82),
+    1px 1px 0 rgba(8,66,44,.72);
+  filter:none;
+}
+.splash-brand .brand-main>span::before{
+  -webkit-text-stroke:.8px rgba(255,255,255,.76);
+  transform:translate(-.75px,-.9px);
+  opacity:.88;
+}
+.splash-brand .brand-main>span::after{
+  -webkit-text-stroke:1.35px rgba(7,65,43,.6);
+  transform:translate(1.5px,1.8px);
+  opacity:.82;
+}
+.splash-brand>small{
+  background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(181,226,204,.12) 52%,rgba(255,255,255,.34));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  -webkit-text-stroke:.75px rgba(247,255,251,.78);
+  text-shadow:-.7px -.7px 0 rgba(255,255,255,.66),.8px .8px 0 rgba(8,65,43,.62);
+}
+.splash-brand .brand-lotus path,
+.splash-brand .logo-base{
+  stroke:rgba(246,255,250,.93);
+  filter:none;
+}

@@ -1,126 +1,103 @@
-const dateInput = document.querySelector('#appointment-date');
-const timeStep = document.querySelector('#time-step');
-const requestStep = document.querySelector('#request-step');
-const detailsStep = document.querySelector('#details-step');
-const selection = document.querySelector('#selection');
-const bookingStatus = document.querySelector('#booking-status');
-const timeButtons = [...document.querySelectorAll('#appointment-times button')];
-const requestButton = document.querySelector('.request');
-const bookingForm = document.querySelector('#booking-form');
+const enquiryForm = document.querySelector('#booking-form');
+const enquiryStatus = document.querySelector('#booking-status');
+const enquiryButton = enquiryForm.querySelector('.request');
 const bookingApiUrl = window.CALM_BOOKING_API_URL || '';
-let selectedTime = '';
-
-const tomorrow = new Date();
-tomorrow.setDate(tomorrow.getDate() + 1);
-dateInput.min = tomorrow.toISOString().slice(0, 10);
+let enquiryConnected = false;
 
 function setStatus(message, type = '') {
-  bookingStatus.textContent = message;
-  bookingStatus.className = `booking-status ${type}`.trim();
+  enquiryStatus.textContent = message;
+  enquiryStatus.className = `booking-status ${type}`.trim();
 }
 
 function jsonp(params) {
   return new Promise((resolve, reject) => {
     if (!bookingApiUrl) {
-      reject(new Error('Online booking is completing its final connection. Please call us in the meantime.'));
+      reject(new Error('The online enquiry form is not connected.'));
       return;
     }
-    const callback = `calmCalendar_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+
+    const callback = `calmEnquiry_${Date.now()}_${Math.random().toString(36).slice(2)}`;
     const script = document.createElement('script');
-    const timer = window.setTimeout(() => finish(new Error('The calendar is taking too long to respond. Please try again.')), 8000);
     const finish = (error, value) => {
       window.clearTimeout(timer);
       delete window[callback];
       script.remove();
       error ? reject(error) : resolve(value);
     };
+    const timer = window.setTimeout(() => finish(new Error('The enquiry service is taking too long to respond.')), 8000);
+
     window[callback] = (value) => finish(null, value);
-    script.onerror = () => finish(new Error('The calendar could not be reached. Please try again.'));
-    const query = new URLSearchParams({ ...params, callback });
-    script.src = `${bookingApiUrl}?${query}`;
+    script.onerror = () => finish(new Error('The enquiry service could not be reached.'));
+    script.src = `${bookingApiUrl}?${new URLSearchParams({ ...params, callback })}`;
     document.head.appendChild(script);
   });
 }
 
-function updateSubmitState() {
-  const ready = Boolean(selectedTime) && bookingForm.checkValidity();
-  requestButton.disabled = !ready;
-  requestStep.classList.toggle('muted', !ready);
-  requestButton.textContent = ready ? 'Send appointment request' : 'Complete your details to continue';
+async function connectEnquiryForm() {
+  try {
+    const result = await jsonp({ action: 'enquiry-health' });
+    if (!result.ok || result.mode !== 'callback-enquiry') throw new Error('The enquiry service is being updated.');
+
+    enquiryConnected = true;
+    enquiryButton.disabled = false;
+    enquiryButton.textContent = 'Send callback request';
+    setStatus('');
+  } catch (error) {
+    enquiryConnected = false;
+    enquiryButton.disabled = true;
+    enquiryButton.textContent = 'Please call 07508 070295';
+    setStatus('The online form is temporarily unavailable while it is being updated. Please call us instead.', 'error');
+  }
 }
 
-dateInput.addEventListener('change', async () => {
-  selectedTime = '';
-  selection.textContent = 'Your chosen appointment will appear here.';
-  timeStep.classList.toggle('muted', !dateInput.value);
-  requestStep.classList.add('muted');
-  detailsStep.classList.add('muted');
-  detailsStep.querySelectorAll('input, textarea').forEach((field) => { field.disabled = true; });
-  timeButtons.forEach((button) => { button.disabled = true; button.classList.remove('selected'); });
-  requestButton.disabled = true;
-  setStatus(dateInput.value ? 'Checking the calendar…' : '');
-  if (!dateInput.value) return;
-
-  try {
-    const result = await jsonp({ action: 'availability', date: dateInput.value });
-    if (!result.ok) throw new Error(result.error || 'Availability could not be checked.');
-    timeButtons.forEach((button) => { button.disabled = !result.slots.includes(button.textContent.trim()); });
-    const availableCount = result.slots.length;
-    setStatus(availableCount ? `${availableCount} appointment${availableCount === 1 ? '' : 's'} available.` : 'There are no appointments available on this date.');
-  } catch (error) {
-    setStatus(error.message, 'error');
-  }
-});
-
-timeButtons.forEach((button) => button.addEventListener('click', () => {
-  timeButtons.forEach((item) => item.classList.remove('selected'));
-  button.classList.add('selected');
-  selectedTime = button.textContent.trim();
-  detailsStep.classList.remove('muted');
-  detailsStep.querySelectorAll('input, textarea').forEach((field) => { field.disabled = false; });
-  const chosen = new Date(`${dateInput.value}T12:00:00`);
-  selection.textContent = `${chosen.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })} at ${selectedTime}`;
-  setStatus('Complete your details and send your request.');
-  updateSubmitState();
-}));
-
-bookingForm.addEventListener('input', updateSubmitState);
-
-bookingForm.addEventListener('submit', async (event) => {
+enquiryForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  if (!selectedTime || !bookingForm.reportValidity() || !bookingApiUrl) return;
+  if (!enquiryConnected || !enquiryForm.reportValidity()) return;
 
-  requestButton.disabled = true;
-  requestButton.textContent = 'Sending your request…';
-  setStatus('Securely connecting your appointment to Google Calendar.');
-  const requestId = self.crypto && crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-  const formData = new FormData(bookingForm);
+  enquiryButton.disabled = true;
+  enquiryButton.textContent = 'Sending your enquiry…';
+  setStatus('Sending your details securely.');
+
+  const requestId = self.crypto && crypto.randomUUID
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  const formData = new FormData(enquiryForm);
   const payload = {
+    action: 'enquiry',
     requestId,
-    date: dateInput.value,
-    time: selectedTime,
     name: formData.get('name'),
-    email: formData.get('email'),
     phone: formData.get('phone'),
-    requirements: formData.get('requirements'),
+    therapyType: formData.get('therapyType'),
+    notes: formData.get('notes') || '',
     website: formData.get('website') || ''
   };
 
   try {
-    await fetch(bookingApiUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+    await fetch(bookingApiUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+
     let result = { state: 'processing' };
     for (let attempt = 0; attempt < 8 && result.state === 'processing'; attempt += 1) {
-      await new Promise((resolve) => window.setTimeout(resolve, 750));
+      await new Promise((resolve) => window.setTimeout(resolve, 700));
       result = await jsonp({ action: 'status', requestId });
     }
-    if (!result.ok || result.state !== 'confirmed') throw new Error(result.error || 'The request could not be confirmed. Please try again.');
 
-    setStatus('Your appointment request has been received. We’ll email your calendar invitation once the appointment is approved.', 'success');
-    requestButton.textContent = 'Request sent';
-    bookingForm.querySelectorAll('input, textarea, button').forEach((field) => { field.disabled = true; });
+    if (!result.ok || result.state !== 'confirmed') {
+      throw new Error(result.error || 'Your enquiry could not be confirmed. Please try again.');
+    }
+
+    setStatus('Thank you — your enquiry has been sent. Angel will call you to discuss your practice and room requirements.', 'success');
+    enquiryButton.textContent = 'Enquiry sent';
+    enquiryForm.querySelectorAll('input, select, textarea, button').forEach((field) => { field.disabled = true; });
   } catch (error) {
     setStatus(error.message, 'error');
-    requestButton.disabled = false;
-    requestButton.textContent = 'Try sending again';
+    enquiryButton.disabled = false;
+    enquiryButton.textContent = 'Try sending again';
   }
 });
+
+connectEnquiryForm();

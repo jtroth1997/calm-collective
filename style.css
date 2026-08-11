@@ -236,3 +236,35 @@ body,.space,.hero{background:var(--sage)}.qualities,.founder{background:var(--mi
     100%{transform:translate3d(0,0,0) rotate(360deg) scale(1)}
   }
 }
+
+
+/* One open, recognisable wind swoosh */
+.wind-field{display:none!important}
+.wind-swirl{
+  inset:8% 1% 10% 1%;
+  opacity:0;
+  animation:singleSwooshArrival 6.15s cubic-bezier(.22,.55,.24,1) .08s 1 both;
+}
+.wind-swirl path{
+  stroke:rgba(255,255,255,.38);
+  stroke-width:2.35;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  animation:singleSwooshDraw 5.8s cubic-bezier(.2,.5,.22,1) .08s 1 both;
+}
+@keyframes singleSwooshArrival{
+  0%{transform:translate3d(-9vw,1vh,0);opacity:0}
+  16%{opacity:.35}
+  48%{transform:translate3d(0,0,0);opacity:1}
+  82%{opacity:.5}
+  100%{transform:translate3d(4vw,-1vh,0);opacity:0}
+}
+@keyframes singleSwooshDraw{
+  0%{stroke-dashoffset:1}
+  64%,82%{stroke-dashoffset:0}
+  100%{stroke-dashoffset:-1}
+}
+@media(max-width:700px){
+  .wind-swirl{inset:12% -20% 14% -20%}
+  .wind-swirl path{stroke-width:1.9}
+}

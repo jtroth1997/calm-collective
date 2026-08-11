@@ -1,3 +1,8 @@
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+const holdHomepageAtTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+holdHomepageAtTop();
+window.addEventListener('pageshow', holdHomepageAtTop);
+
 const enquiryForm = document.querySelector('#booking-form');
 const enquiryStatus = document.querySelector('#booking-status');
 const enquiryButton = enquiryForm.querySelector('.request');
@@ -120,3 +125,22 @@ enquiryForm.addEventListener('submit', async (event) => {
 });
 
 connectEnquiryForm();
+
+
+const revealTargets = document.querySelectorAll(
+  '.section-heading, .practice-grid > div, .benefits-section article, .room-card, .process-grid article, .booking-card, .faq-list details'
+);
+if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -45px' });
+
+  revealTargets.forEach((element) => {
+    element.classList.add('premium-reveal');
+    revealObserver.observe(element);
+  });
+}

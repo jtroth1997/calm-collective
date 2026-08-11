@@ -40,12 +40,12 @@ async function connectEnquiryForm() {
 
     enquiryConnected = true;
     enquiryButton.disabled = false;
-    enquiryButton.textContent = 'Send callback request';
+    enquiryButton.textContent = 'Submit';
     setStatus('');
   } catch (error) {
     enquiryConnected = false;
     enquiryButton.disabled = true;
-    enquiryButton.textContent = 'Please call 07508 070295';
+    enquiryButton.textContent = 'Submit';
     setStatus('The online form is temporarily unavailable while it is being updated. Please call us instead.', 'error');
   }
 }
@@ -55,7 +55,7 @@ enquiryForm.addEventListener('submit', async (event) => {
   if (!enquiryConnected || !enquiryForm.reportValidity()) return;
 
   enquiryButton.disabled = true;
-  enquiryButton.textContent = 'Sending your enquiry…';
+  enquiryButton.textContent = 'Submitting…';
   setStatus('Sending your details securely.');
 
   const requestId = self.crypto && crypto.randomUUID
@@ -91,12 +91,12 @@ enquiryForm.addEventListener('submit', async (event) => {
     }
 
     setStatus('Thank you — your enquiry has been sent. Angel will call you to discuss your practice and room requirements.', 'success');
-    enquiryButton.textContent = 'Enquiry sent';
+    enquiryButton.textContent = 'Submitted';
     enquiryForm.querySelectorAll('input, select, textarea, button').forEach((field) => { field.disabled = true; });
   } catch (error) {
     setStatus(error.message, 'error');
     enquiryButton.disabled = false;
-    enquiryButton.textContent = 'Try sending again';
+    enquiryButton.textContent = 'Submit';
   }
 });
 

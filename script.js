@@ -4,6 +4,20 @@ const enquiryButton = enquiryForm.querySelector('.request');
 const bookingApiUrl = window.CALM_BOOKING_API_URL || '';
 let enquiryConnected = false;
 
+const therapyTypeField = enquiryForm.querySelector('#therapy-type');
+const otherTherapyField = enquiryForm.querySelector('#other-therapy-field');
+const otherTherapyInput = enquiryForm.querySelector('#other-therapy');
+
+function updateOtherTherapy() {
+  const needsDetails = therapyTypeField.value === 'Other';
+  otherTherapyField.hidden = !needsDetails;
+  otherTherapyInput.required = needsDetails;
+  if (!needsDetails) otherTherapyInput.value = '';
+}
+
+therapyTypeField.addEventListener('change', updateOtherTherapy);
+updateOtherTherapy();
+
 function setStatus(message, type = '') {
   enquiryStatus.textContent = message;
   enquiryStatus.className = `booking-status ${type}`.trim();
@@ -68,6 +82,8 @@ enquiryForm.addEventListener('submit', async (event) => {
     name: formData.get('name'),
     phone: formData.get('phone'),
     therapyType: formData.get('therapyType'),
+    otherTherapy: formData.get('otherTherapy') || '',
+    callbackTime: formData.get('callbackTime') || 'Any time',
     notes: formData.get('notes') || '',
     website: formData.get('website') || ''
   };
@@ -90,7 +106,7 @@ enquiryForm.addEventListener('submit', async (event) => {
       throw new Error(result.error || 'Your enquiry could not be confirmed. Please try again.');
     }
 
-    setStatus('Thank you — your enquiry has been sent. Angel will call you to discuss your practice and room requirements.', 'success');
+    setStatus('Thank you — your enquiry has been sent. A member of Calm Collective will contact you within three working days.', 'success');
     enquiryButton.textContent = 'Submitted';
     enquiryForm.querySelectorAll('input, select, textarea, button').forEach((field) => { field.disabled = true; });
   } catch (error) {

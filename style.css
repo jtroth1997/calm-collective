@@ -448,3 +448,124 @@ footer,.legal-header,.legal-footer{background:#213b33}
 .legal-body{background:#f7f3eb}
 .legal-note{background:#e6ece7;border-color:#7c9585}
 ::selection{background:#c8d5cc;color:#243b33}
+
+
+/* Quiet Light redesign — deliberately different, airy and restorative */
+:root{
+  --forest:#244239;
+  --ink:#2d3934;
+  --ivory:#f4efe6;
+  --porcelain:#fbf9f5;
+  --mist:#d4e0d9;
+  --sea-glass:#b7ccc1;
+  --soft-sage:#91ab9b;
+  --lavender:#cbc6d3;
+  --clay:#d8bdb4;
+  --oat:#ddd0bd;
+  --sage:#91ab9b;
+  --deep:#244239;
+  --mid:#759383;
+  --eucalyptus:#b7ccc1;
+  --pale:#f4efe6;
+  --white:#fff;
+}
+body{background:var(--ivory);color:var(--ink)}
+.premium-splash{
+  background:
+    radial-gradient(circle at 9% 15%,rgba(255,255,255,.72),transparent 28%),
+    radial-gradient(circle at 87% 82%,rgba(216,189,180,.45),transparent 29%),
+    linear-gradient(145deg,#dce7e1 0%,#b8cec2 48%,#9fb9aa 100%);
+}
+.premium-splash:after{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(36,66,57,.08))}
+.ambient-one{background:radial-gradient(circle,rgba(255,255,255,.65),rgba(255,255,255,0) 68%);opacity:.62}
+.ambient-two{background:radial-gradient(circle,rgba(203,198,211,.62),rgba(203,198,211,0) 68%);opacity:.5}
+.splash-brand{color:var(--forest)!important;text-shadow:none;filter:drop-shadow(0 25px 60px rgba(59,91,79,.12))}
+.splash-lockup>p,.splash-purpose{color:rgba(36,66,57,.82)}
+.splash-cta{background:var(--forest);color:#fff;box-shadow:0 18px 42px rgba(36,66,57,.18)}
+.splash-cta:hover{background:#31594c;color:#fff}
+.wind-swirl path{stroke:rgba(36,66,57,.34)}
+.scroll-cue{color:rgba(36,66,57,.72)}
+.scroll-cue i{background:linear-gradient(var(--forest),transparent)}
+
+.site-header{background:rgba(251,249,245,.9);color:var(--forest);border-bottom:1px solid rgba(55,83,73,.12);box-shadow:0 10px 40px rgba(62,87,78,.05)}
+.site-header .header-cta{border-color:rgba(36,66,57,.5)}
+.hero{background:var(--ivory);color:var(--ink)}
+.hero-copy{background:linear-gradient(145deg,#f7f2ea,#eee7dc)}
+.hero-copy:before{width:320px;height:320px;background:rgba(183,204,193,.26);left:-145px;top:-70px}
+.hero .eyebrow{color:#61776d}
+.hero .intro{color:#58665f}
+.hero .quiet-link{border-color:rgba(36,66,57,.45)}
+.hero .meta{border-color:rgba(36,66,57,.2);color:#54635c}
+.hero .button{background:var(--forest);color:#fff}
+.hero-photo:after{background:linear-gradient(90deg,rgba(244,239,230,.18),transparent 35%)}
+.badge{background:rgba(244,239,230,.93);color:var(--forest);box-shadow:0 14px 40px rgba(35,61,52,.16)}
+
+.intro-section{background:var(--mist);color:var(--ink)}
+.intro-section .two-col>div p{color:#56665e}
+.intro-section .two-col .lead{color:var(--forest)}
+.practitioner-fit{background:var(--sea-glass);color:var(--ink)}
+.practitioner-fit .section-heading>p{color:#4f6259}
+.practice-grid{background:rgba(36,66,57,.12);border-color:rgba(36,66,57,.12)}
+.practice-grid div{background:rgba(251,249,245,.7);color:var(--forest);border:0}
+.practice-grid div:hover{background:#fff}
+.fit-note{border-color:rgba(36,66,57,.18)}
+.fit-note p{color:#4f6158}
+.benefits-section{background:var(--porcelain)}
+.benefits-section article{background:#fbf9f5;border-color:#e2ddd4}
+.benefits-section article:nth-child(3n+2){background:#ebe7ef}
+.benefits-section article:nth-child(3n){background:#edf3ef}
+.benefits-section article:nth-child(4){background:#f1e5df}
+.benefits-section h3{color:var(--forest)}
+
+.rooms-section{background:linear-gradient(145deg,#e7eee9,#cbdad2);color:var(--ink)}
+.rooms-section .section-heading>p{color:#52645b}
+.room-card{background:rgba(251,249,245,.95);box-shadow:0 24px 70px rgba(55,83,73,.12)}
+.room-photo-placeholder{background:linear-gradient(145deg,#9db7a8,#d6e1da)}
+.room-card:nth-child(2) .room-photo-placeholder{background:linear-gradient(145deg,#b5afc1,#ded9e3)}
+.room-card:nth-child(3) .room-photo-placeholder{background:linear-gradient(145deg,#c7a89e,#ead8d1)}
+.room-card:nth-child(4) .room-photo-placeholder{background:linear-gradient(145deg,#baa98f,#e5dac8)}
+.room-photo-placeholder:before,.room-photo-placeholder:after{border-color:rgba(255,255,255,.56)}
+.room-disclaimer{color:#52645b}
+
+.process-section{background:var(--lavender);color:var(--ink)}
+.process-section .section-heading>p{color:#56545e}
+.process-grid{background:rgba(65,61,74,.1)}
+.process-grid article{background:rgba(251,249,245,.54)}
+.process-grid article>span{color:#655e72}
+.process-grid h3{color:#373640}
+.process-grid p{color:#5e5b65}
+
+.appointment{background:linear-gradient(145deg,#dfc9c1,#d7e1db);color:var(--ink)}
+.booking-copy>p{color:#516158}
+.booking-copy .note{border-color:rgba(36,66,57,.18);color:#4d5d55}
+.booking-card{background:rgba(251,249,245,.96);box-shadow:0 34px 80px rgba(62,83,74,.15)}
+.step{border-color:#ded9cf}
+.step>span{color:#789181}
+.contact-grid input,.contact-grid textarea,.contact-grid select{background:#fff;border-color:#d0d8d1}
+.request{background:var(--forest);color:#fff}
+.request:not(:disabled):hover{background:#31594c}
+
+.independent-section{background:var(--forest);color:#fff}
+.independent-section .two-col>div p{color:rgba(255,255,255,.78)}
+.independent-section .two-col .lead{color:#fff}
+.faq-section{background:var(--porcelain);color:var(--ink)}
+.faq-list,.faq-list details{border-color:#ded9cf}
+.faq-list summary:after{color:#789181}
+
+.location{background:var(--mist);color:var(--ink)}
+.location>div{background:linear-gradient(145deg,#c8d8cf,#b5c9bd)}
+.location p:not(.eyebrow){color:#4d5f56}
+.final{background:linear-gradient(145deg,#244239,#365f51);color:#fff}
+.final .button{background:#fff;color:var(--forest)}
+footer,.legal-header,.legal-footer{background:#1f3931}
+.mobile-enquire{background:var(--forest);color:#fff;border-color:rgba(255,255,255,.2)}
+.legal-body{background:var(--ivory)}
+.legal-page h1,.legal-page h2{color:var(--forest)}
+.legal-note{background:var(--mist);border-color:var(--soft-sage)}
+::selection{background:var(--lavender);color:var(--forest)}
+
+@media(max-width:700px){
+  .site-header{background:rgba(251,249,245,.94)}
+  .hero-copy{background:linear-gradient(160deg,#f7f2ea,#ebe4d8)}
+  .room-card{box-shadow:0 18px 50px rgba(55,83,73,.1)}
+}
